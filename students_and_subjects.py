@@ -25,37 +25,41 @@ for one_student in grades:
 def get_highest_average_grade(grades):
     all_averages = []
     highest_average = 0
+    student = None
 
     for student in grades:
         one_average = get_average_grade(student)
-        all_averages.append(one_average)
+        all_averages.append({"name": student["name"], "average": one_average})
 
-    for average in all_averages:
-        if average > highest_average:
-            highest_average = average 
+    for person in all_averages:
+        if person["average"] > highest_average:
+            highest_average = person["average"] 
+            student = person["name"]
     
-    return highest_average
+    return student
 
-print(f"Highest average grade: {get_highest_average_grade(grades)}")
+print(f"Student with the highest average grade: {get_highest_average_grade(grades)}")
 
 # 4. Write a function to find the student with the highest grade in a particular subject:
 
 def get_highest_grade_by_subject(grades, subject):
     subject_grades = []
     highest_grade = 0
+    student = None
 
     for one_student in grades:
         for key, value in one_student.items():
             if key == subject:
-                subject_grades.append(value)
+                subject_grades.append({"name": one_student["name"], "grade": value})
 
-    for one_grade in subject_grades:
-        if one_grade > highest_grade:
-            highest_grade = one_grade
+    for one_person in subject_grades:
+        if one_person["grade"] > highest_grade:
+            highest_grade = one_person["grade"]
+            student = one_person["name"]
 
-    return highest_grade
+    return student
 
-print(f"Highest grade by subject: {get_highest_grade_by_subject(grades, 'history')}")
+print(f"Student with the highest grade in a particular subject: {get_highest_grade_by_subject(grades, 'history')}")
 
 
 # 5. Write a function to add a new student to the list of grades:
@@ -70,7 +74,7 @@ def add_student(grades, name, math, english, history):
     grades.append(one_student)
     return grades
 
-print(add_student(grades, "yuzuha", 80, 82, 90))
+print(add_student(grades, "Yuzuha", 95, 98, 91))
 
 # 6. Write a function to calculate the percentage of students who passed a particular subject:
 
