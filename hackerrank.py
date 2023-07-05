@@ -111,3 +111,42 @@ def miniMaxSum(arr):
     print(min_sum, max_sum)
 
 # miniMaxSum([1, 2, 3, 4, 5])
+
+def timeConversion(s):
+    military_time = []
+    convert = "no"
+    hour = 0
+    time = s.split(":")
+    
+    for count, val in enumerate(time):
+        if count == 0:
+            hour = val
+        if count == 2:
+            seconds = list(val)
+            if "P" in seconds and hour != "12":
+                    convert = "yes"
+            if "A" in seconds and hour == "12":
+                convert = "yes"
+            for i in range(len(seconds)-1, 1, -1):
+                seconds.pop()
+    seconds = ''.join(seconds)
+
+    for i, m in enumerate(time):
+        if i == 0:
+            if convert == "yes" and hour != "12":
+                hour = int(m) + 12
+                military_time.append(str(hour))
+            elif convert == "yes" and hour == "12":
+                hour = int(m) - 12
+                military_time.append("0"+str(hour))
+            else:
+                military_time.append(m)
+        if i == 1:
+            military_time.append(m)
+        if i == 2:
+            military_time.append(seconds)
+        
+    new_time = ":".join(military_time)
+    print(new_time)
+
+# timeConversion("09:01:00AM")
