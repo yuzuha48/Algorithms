@@ -150,3 +150,133 @@ def timeConversion(s):
     print(new_time)
 
 # timeConversion("09:01:00AM")
+
+def fizzBuzz(n):
+    for i in range(1, n+1):
+        if i%3 == 0: 
+            if i%5 == 0:
+                print("Fizzbuzz")
+            else: 
+                print("Fizz")
+        elif i%5 == 0:
+            print("Buzz")
+        else: 
+            print(i)
+
+# fizzBuzz(65)
+
+def breakPalindrome(palindromeStr):
+    highest_val = find_highest_val(palindromeStr)
+    new_string = create_new(palindromeStr, highest_val)
+
+    if new_string == palindromeStr:
+        print("IMPOSSIBLE")
+    elif len(new_string)%2 == 0:
+        print(new_string)
+    elif len(new_string)%2 != 0:
+        impossible = look_for_palindrome(new_string)
+        if impossible == "yes":
+            print("IMPOSSIBLE")
+        else: 
+            print(new_string)
+
+def find_highest_val(palindromeStr):
+    highest_val = palindromeStr[0]
+    for i in palindromeStr:
+        if i > highest_val:
+            highest_val = i
+    return highest_val
+
+def create_new(palindromeStr, highest_val):
+    new_string = ""
+    replaced = 0
+    for i in palindromeStr: 
+        if replaced == 0 and i == highest_val:
+            new_string += "a"
+            replaced += 1 
+        else: 
+            new_string += i
+    return new_string
+
+def look_for_palindrome(new_string):
+    impossible = "no"
+    for count, val in enumerate(new_string):
+        count = count + 1
+        for i in range(len(new_string)-count, count, -1):
+            if val == new_string[i]:
+                impossible = "yes"
+                break
+            else: 
+                impossible = "no"
+                break
+    return impossible
+
+# breakPalindrome("abcaa")
+
+def areAlmostEquivalent(s, t):
+    answer = []
+
+    for i in range(len(s)):
+        strings = get_one_string(i, s, t)
+        difference = compare_lengths(strings)
+        if difference != 0:
+            answer.append("NO")
+        else: 
+            count_dict = count_letters(strings)
+            boolean = compare_count(count_dict)
+            if boolean == "yes":
+                answer.append("YES")
+            else:
+                answer.append("NO")
+
+    print(answer)
+
+def get_one_string(num, s, t):
+    for count, val in enumerate(s):
+        if count == num:
+            s_string = val
+    for c, v in enumerate(t):
+        if c == num:
+            t_string = v
+    return [s_string, t_string]
+
+def compare_lengths(strings):
+    difference = len(strings[0]) - len(strings[1])
+    return difference 
+
+def count_letters(strings):
+    letters_s = {}
+    letters_t = {}
+    for i in strings[0]: 
+        if i not in letters_s: 
+            letters_s[i] = 1
+        else:
+            letters_s[i] += 1
+    for j in strings[1]:
+        if j not in letters_t:
+            letters_t[j] = 1
+        else: 
+            letters_t[j] += 1 
+    return [letters_s, letters_t]
+    
+def compare_count(count_dict):
+    diff_arr = []
+    answer = "yes"
+    for key in count_dict[0]:
+        if key not in count_dict[1]:
+            count_dict[1][key] = 0
+    for k in count_dict[1]:
+        if k not in count_dict[0]:
+            count_dict[0][k] = 0
+
+    for letter, count in count_dict[0].items():
+        difference = abs(count - count_dict[1][letter])
+        diff_arr.append(difference)
+
+    for i in diff_arr:
+        if i > 3:
+            answer = "no"
+
+    return answer
+
+areAlmostEquivalent(['aab', 'aabbcc', 'aab'], ['bbabbc', 'abbbcc', 'bab'])
