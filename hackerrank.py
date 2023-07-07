@@ -279,4 +279,4 @@ def compare_count(count_dict):
 
     return answer
 
-areAlmostEquivalent(['aab', 'aabbcc', 'aab'], ['bbabbc', 'abbbcc', 'bab'])
+# areAlmostEquivalent(['aab', 'aabbcc', 'aab'], ['bbabbc', 'abbbcc', 'bab'])
