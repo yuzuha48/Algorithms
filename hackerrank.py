@@ -75,7 +75,6 @@ def bonAppetit(bill, k, b):
         difference = b-anna 
         print(difference)
 
-    
 # bonAppetit([2,4,6], 2, 6)
 
 def plusMinus(arr):
@@ -228,7 +227,6 @@ def areAlmostEquivalent(s, t):
                 answer.append("YES")
             else:
                 answer.append("NO")
-
     print(answer)
 
 def get_one_string(num, s, t):
@@ -276,7 +274,6 @@ def compare_count(count_dict):
     for i in diff_arr:
         if i > 3:
             answer = "no"
-
     return answer
 
 # areAlmostEquivalent(['aab', 'aabbcc', 'aab'], ['bbabbc', 'abbbcc', 'bab'])
@@ -304,7 +301,6 @@ def max_sighting(bird_types):
             m = val 
         elif val > m:
             m = val
-            
     return m
     
 def check_for_dupes(m, bird_types):
@@ -321,8 +317,7 @@ def check_for_dupes(m, bird_types):
             elif i < min_type:
                 min_type = i
     else:
-        min_type = duplicates[0]
-                
+        min_type = duplicates[0]      
     return min_type
 
 # migratoryBirds([1,1,2,2,3])
