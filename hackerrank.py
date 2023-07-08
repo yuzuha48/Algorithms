@@ -279,4 +279,78 @@ def compare_count(count_dict):
 
     return answer
 
-areAlmostEquivalent(['aab', 'aabbcc', 'aab'], ['bbabbc', 'abbbcc', 'bab'])
+# areAlmostEquivalent(['aab', 'aabbcc', 'aab'], ['bbabbc', 'abbbcc', 'bab'])
+
+def migratoryBirds(arr):
+    bird_types = count_type(arr)
+    m = max_sighting(bird_types)
+    min_type = check_for_dupes(m, bird_types)
+    print(min_type)
+    
+def count_type(arr):
+    bird_types = {}
+    for num in arr:
+        if num not in bird_types:
+            bird_types[num] = 1
+        else:
+            bird_types[num] += 1 
+    return bird_types 
+    
+def max_sighting(bird_types):
+    m = None
+    
+    for key, val in bird_types.items():
+        if m == None:
+            m = val 
+        elif val > m:
+            m = val
+            
+    return m
+    
+def check_for_dupes(m, bird_types):
+    duplicates = []
+    min_type = None
+    
+    for key, val in bird_types.items():
+        if val == m:
+            duplicates.append(key)
+    if len(duplicates) > 0:
+        for i in duplicates:
+            if min_type == None:
+                min_type = i
+            elif i < min_type:
+                min_type = i
+    else:
+        min_type = duplicates[0]
+                
+    return min_type
+
+# migratoryBirds([1,1,2,2,3])
+
+def catAndMouse(x, y, z):
+    catADiff = abs(z-x)
+    catBDiff = abs(z-y)
+    
+    if catADiff > catBDiff:
+        print("Cat B")
+    elif catADiff < catBDiff:
+        print("Cat A")
+    else:
+        print("Mouse C")
+
+# catAndMouse(1,5,4)
+
+def hurdleRace(k, height):
+    highest = height[0]
+    
+    for i in height:
+        if i > highest:
+            highest = i
+    
+    if highest > k:
+        doses = highest-k
+        print(doses)
+    else:
+        print(0)
+
+# hurdleRace(4, [1,2,3,5,6])
