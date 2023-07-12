@@ -349,3 +349,92 @@ def hurdleRace(k, height):
         print(0)
 
 # hurdleRace(4, [1,2,3,5,6])
+
+def sockMerchant(ar):
+    socks = create_dict(ar)
+    pair_count = int(look_for_pairs(socks))
+    print(pair_count)
+    
+def create_dict(ar):
+    socks = {}
+    for sock in ar: 
+        if sock not in socks:
+            socks[sock] = 1
+        else:
+            socks[sock] += 1
+    return socks
+
+def look_for_pairs(socks):
+    pair_count = 0
+    for key, val in socks.items():
+        pairs = val/2
+        count = pairs//1
+        pair_count += count 
+    return pair_count 
+
+# sockMerchant([1,2,1,1,2,3])
+
+def findMedian(arr):
+    arr.sort()
+    mid = (len(arr)/2)//1
+    for count, val in enumerate(arr):
+        if count == mid:
+            print(val)
+
+# findMedian([3,4,2,5,1])
+
+def lonelyinteger(a):
+    nums = {}
+    for num in a:
+        if num not in nums:
+            nums[num] = 1
+        else:
+            nums[num] += 1
+    for key, val in nums.items():
+        if val < 2:
+            print(key)
+    
+# lonelyinteger([4,4,3,2,2,5,5])
+
+def diagonalDifference(arr):
+    ltr = 0
+    rtl = 0
+    last = len(arr)-1
+    for count, val in enumerate(arr):
+        for num, value in enumerate(val): 
+            if count == num:
+                ltr += value
+        position = last-count 
+        rtl += val[position]
+    diff = abs(ltr-rtl)
+    print(diff)
+
+# diagonalDifference([[2,4,5],[1,3,6],[8,7,9]])
+
+def getMoneySpent(keyboards, drives, b):
+    most_expensive = 0 
+    
+    for keyboard in keyboards:
+        for drive in drives:
+            cost = keyboard + drive
+            if cost <= b:
+                if cost > most_expensive:
+                    most_expensive = cost 
+    if most_expensive == 0:
+        print(-1)
+    else:
+        print(most_expensive)
+
+# getMoneySpent([40,10,25], [5,20,30], 50)
+
+def angryProfessor(k, a):
+    on_time = 0
+    for student in a:
+        if student <= 0:
+            on_time += 1
+    if on_time >= k:
+        print("NO")
+    else:
+        print("YES")
+
+# angryProfessor(3, [-5,-3,0,1,2])
