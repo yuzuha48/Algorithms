@@ -438,3 +438,55 @@ def angryProfessor(k, a):
         print("YES")
 
 # angryProfessor(3, [-5,-3,0,1,2])
+
+def string_to_array(string):
+    numbers = []
+    array = string.split(" ")
+    for i in array:
+        numbers.append(int(i))
+    return numbers
+
+def countingSort(arr):
+    frequency_array = []
+    for i in range(100):
+        frequency_array.append(0)
+    for j in range(len(frequency_array)):
+        for num in arr:
+            if num == j:
+                frequency_array[j] += 1 
+    print(frequency_array)
+
+test = "63 25 73 1 98 73 56 84 86 57 16 83 8 25 81 56 9 53 98 67 99 12 83 89 80 91 39 86 76 85 74 39 25 90 59 10 94 32 44 3 89 30 27 79 46 96 27 32 18 21 92 69 81 40 40 34 68 78 24 87 42 69 23 41 78 22 6 90 99 89 50 30 20 1 43 3 70 95 33 46 44 9 69 48 33 60 65 16 82 67 61 32 21 79 75 75 13 87 70 33"
+numbers = string_to_array(test)
+# countingSort(numbers)
+
+def flippingMatrix(matrix):
+    # say we have a four-by-four matrix 
+    n = len(matrix)
+    sum = 0
+    # n//2 gives us the number of numbers in the upper left hand quadrant (we only loop through the numbers in the upper left hand quadtrant bc we'll be looking at their mirror values)
+    for i in range(n//2):
+        for j in range(n//2):
+            # first i iteration
+            # when i=0 and j=0, get the number in the [0,0] position, the [0,3] position, the [3,0] position, and the [3,3] position 
+            # when i=0 and j=1, get the number in the [0,1] position, the [0,2] position, the [3,1] position, and the [3,2] position 
+            
+            # second i iteration
+            # when i=1 and j=0, get the number in the [1,0] position, the [1,3] position, the [2,0] position, and the [2,3] position 
+            # when i=1 and j=1, get the number in the [1,1] position, the [1,2] position, the [2,1] position, and the [2,2] position
+            
+            sum += max(matrix[i][j], matrix[i][n-j-1], matrix[n-i-1][j], matrix[n-i-1][n-j-1])
+            
+            # first i iteration
+            # when i=0 and j=0, max(112, 119, 62, 108) will add 119 to the sum 
+            # when i=0 and j=1, max(42, 83, 98, 114) will add 114 to the sum
+
+            # second i iteration
+            # when i=1 and j=0, max(56, 49, 15, 43) will add 56 to the sum 
+            # when i=1 and j=1, max(125, 56, 78, 101) will add 125 to the sum 
+
+            # the total sum is 414
+
+    return sum 
+    
+
