@@ -488,5 +488,103 @@ def flippingMatrix(matrix):
             # the total sum is 414
 
     return sum 
-    
 
+def towerBreakers(n, m): 
+    if m == 1:
+        print(2)
+    if n%2 == 1:
+        print(1)
+    else:
+        print(2)
+
+# towerBreakers(2, 6)
+
+def caesarCipher(s, k):
+    encrypted = ""
+    for i in s:
+        if ord(i.lower()) >= 97 and ord(i.lower()) <= 122:
+            if k <= 26:
+                new_ascii = ord(i.lower()) + k
+            else:
+                times_around = k//26
+                move = k - (26 * times_around)
+                new_ascii = ord(i.lower()) + move
+            if new_ascii <= 122:
+                new_letter = chr(new_ascii)
+                if i.isupper():
+                    new_letter = new_letter.upper()
+                encrypted += new_letter
+            elif new_ascii > 122:
+                diff = new_ascii - (122 + 1) 
+                new_ascii = 97 + diff
+                new_letter = chr(new_ascii)
+                if i.isupper():
+                    new_letter = new_letter.upper()
+                encrypted += new_letter
+        else:
+            encrypted += i
+
+    print(encrypted)
+
+# caesarCipher("middle-Outz", 80)
+
+def palindromeIndex(s):
+    last = len(s)-1
+    for i, f in enumerate(s):
+        for j in range(last, 0, -1):
+            if f == s[j]:
+                last -= 1
+                break
+            else:
+                if f in s[i+1:]:
+                    print(j)
+                    return j
+                else:
+                    print(i)
+                    return i
+    print(-1)
+    return -1
+
+# palindromeIndex('cbcbaaabcbc')
+
+def str_to_arr(string):
+    values = string.split("\n")
+    return values
+
+def gridChallenge(grid):
+    new_grid = []
+    for string in grid:
+        ascii = []
+        letters = []
+        for letter in string:
+            ascii.append(ord(letter))
+        ascii.sort()
+        for l in ascii:
+            letters.append(chr(l))
+        new_grid.append(''.join(letters))
+
+    for index in range(len(new_grid[0])):
+        columns = []
+        for str in new_grid:
+            for i in range(len(str)):
+                if i == index:
+                    columns.append(ord(str[i]))
+                    break
+        
+        compare = 0
+        for num in columns:
+            if num >= compare:
+                compare = num
+                continue
+            else:
+                print("NO")
+                return "NO"
+            
+    print("YES")
+    return "YES"
+
+test2 = """iv
+sm"""
+
+array = str_to_arr(test2)
+gridChallenge(array)
