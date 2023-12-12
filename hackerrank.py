@@ -530,22 +530,70 @@ def caesarCipher(s, k):
 
 def palindromeIndex(s):
     last = len(s)-1
+
+    # loop through front and back of string 
     for i, f in enumerate(s):
-        for j in range(last, 0, -1):
+        for j in range(last, -1, -1):
+            # if "first" and "last" letters are the same, keep moving in and comparing letters
             if f == s[j]:
                 last -= 1
                 break
+            # if "first" and "last" letters aren't the same...
             else:
-                if f in s[i+1:]:
-                    print(j)
-                    return j
-                else:
-                    print(i)
-                    return i
+                # look at string without the "first" letter and then without the "last" letter and see if either are palindromes 
+                index = checkForPalindrome(s, i, j)
+                print(index)
+                return index
     print(-1)
     return -1
 
-# palindromeIndex('cbcbaaabcbc')
+def checkForPalindrome(string, index_i, index_j):
+    first_string = ""
+    second_string = ""
+    last_num = len(string)-2
+    last = len(string)-2
+
+    # create new strings without the "first" and "last" letter
+    for letter in range(len(string)):
+        if letter == index_i:
+            pass
+        else: 
+            first_string += string[letter]
+    
+    for l in range(len(string)):
+        if l == index_j:
+            pass
+        else:
+            second_string += string[l]
+
+    # loop through front and back of string
+    for i, f in enumerate(first_string):
+        for j in range(last_num, -1, -1):
+            # if "first" and "last" letters are the same...
+            if f == first_string[j]:
+                # if i and j are at the same position or have crossed paths (if all of the "first" and "last" letters have been the same), return index_1 (position of the letter that needs to be removed to create a palindrome)
+                if i == j or i > j:
+                    return index_i 
+                # else keep moving in and comparing letters
+                else:
+                    last_num -= 1
+                    break
+            # if the "first" and "last" letters of string 1 are not the same...
+            else:
+                # check for palindrome in the second string (same process as above) 
+                for g, first in enumerate(second_string):
+                    for h in range(last, -1, -1):
+                        if first == second_string[h]:
+                            if g == h or g > h:
+                                return index_j 
+                            else:
+                                last -= 1
+                                break
+                        # if nothing has been returned, there's no palindromes; return -1
+                        else:
+                            return -1
+
+# palindromeIndex('baa')
 
 def str_to_arr(string):
     values = string.split("\n")
@@ -587,4 +635,17 @@ test2 = """iv
 sm"""
 
 array = str_to_arr(test2)
-gridChallenge(array)
+# gridChallenge(array)
+
+def superDigit(n, k):
+    # the super digit of a number is closely related to its remainder when divided by 9
+
+    # each digit in the number string is summed up and then multipled by how many times the number string repeats 
+
+    # the -1 subtracts 1 from the sum of digits; if the super digit is 9, the remainder will be 0 since 9/9 leaves no remainder; in order to ensure we get a super digit of 9 (and not 0), we have to subtract 1 to get 8; then we do 8/9 which leaves us with a remainder of 8, and the +1 ensures our final answer is 9 
+
+    # the +1 adds 1 to the remainder; if we have a super digit of 1, then doing -1 will give us 0; then we do 0/9 which leaves us with a remainder of 0, and the +1 ensures our final answer is 1 
+    
+    return 1 + (k * sum(int(num) for num in n) - 1) % 9
+
+superDigit('1111111111', 10)
