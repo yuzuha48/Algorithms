@@ -648,4 +648,25 @@ def superDigit(n, k):
     
     return 1 + (k * sum(int(num) for num in n) - 1) % 9
 
-superDigit('1111111111', 10)
+# superDigit('1111111111', 10)
+
+def minimumBribes(q):
+    bribes = 0 
+
+    for position, person in enumerate(q):
+        og_position = person-1
+        if og_position - position > 2:
+            print("Too chaotic")
+            return
+        
+        # create a sublist of q using the numbers from the position before the og position (to capture larger numbers that bribed their way forward?) up until, but not including, the current position (the max function ensures that the index is at least 0, so if the og position is 0, we don't get an index of -1)
+
+        # if the values in the sublist are greater than the current person, a bribe was made 
+
+        for p in q[max(og_position - 1, 0):position]:
+            if p > person:
+                bribes += 1
+
+    print(bribes)
+
+minimumBribes([1,2,5,3,7,8,6,4])
