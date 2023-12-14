@@ -677,6 +677,7 @@ def truckTour(petrolpumps):
 
     for count, station in enumerate(petrolpumps):
         if start:
+            print(start)
             return start
         if station[1] <= station[0]:
             remaining_gas = station[0] - station[1]
@@ -697,4 +698,47 @@ def truckTour(petrolpumps):
                 else:
                     i = 0
 
-truckTour([[1,5], [4,3], [1,4], [10,3], [8, 7]])
+# truckTour([[1,5], [4,3], [1,4], [10,3], [8, 7]])
+
+def mergeLists(head1, head2):
+    # if one of the heads is empty, return the other one because there's no need to merge the heads
+    if head1 == None:
+        return head2
+    if head2 == None:
+        return head1 
+    
+    # the head that has the smaller number ("data") is made the head of the merged node, then we move on to the next "head" 
+    if head1.data <= head2.data:
+        head = head1
+        head1 = head1.next
+    else:
+        head = head2
+        head2 = head2.next
+
+    # start at the head of the merged list
+    current = head
+
+    # while there's a value for either head1 or head2...
+    while head1 != None or head2 != None:
+
+        # if head1 is None, the next value becomes head2 (and each value in head2 has a next value that it points to, so essentially, the rest of the list is what's left in head2) and then the merged list is finished
+        if head1 == None:
+            current.next = head2
+            break 
+        if head2 == None:
+            current.next = head1 
+            break 
+        
+        # make the merged list's next whichever head's data is smaller and move to the next "head"
+        if head1.data <= head2.data:
+            current.next = head1
+            head1 = head1.next
+        else:
+            current.next = head2
+            head2 = head2.next 
+
+        # move to the next position in the merged list
+        current = current.next
+
+    return head
+
