@@ -669,4 +669,32 @@ def minimumBribes(q):
 
     print(bribes)
 
-minimumBribes([1,2,5,3,7,8,6,4])
+# minimumBribes([1,2,5,3,7,8,6,4])
+
+def truckTour(petrolpumps):
+    remaining_gas = None
+    start = None
+
+    for count, station in enumerate(petrolpumps):
+        if start:
+            return start
+        if station[1] <= station[0]:
+            remaining_gas = station[0] - station[1]
+            i = count + 1
+            while i != count:
+                if i <= len(petrolpumps)-1:
+                    remaining_gas += petrolpumps[i][0]
+                    remaining_gas -= petrolpumps[i][1]
+                    if i == len(petrolpumps)-1:
+                        i = -1
+                    i += 1 
+                    if remaining_gas < 0:
+                        if count == start:
+                            start = None
+                        break
+                    else:
+                        start = count
+                else:
+                    i = 0
+
+truckTour([[1,5], [4,3], [1,4], [10,3], [8, 7]])
